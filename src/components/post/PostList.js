@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from 'react-router-dom'
-import { getPosts, deletePost } from "./postManager.js"
+import { PostCard } from "./PostCard.js";
+import { getPosts } from "./PostManager.js"
 
 export const PostList = (props) => {
     const history = useHistory();
-    const [ Posts, setPosts ] = useState([])
+    const [ posts, setPosts ] = useState([])
 
     useEffect(() => {
         getPosts().then(data => setPosts(data))
     }, [])
 
-    return (
-        <>
+    return <>
         <header>
             <button className="btn btn-2 btn-sep icon-create"
                 onClick={() => {
@@ -19,23 +19,8 @@ export const PostList = (props) => {
                 }}
             >New Post</button>
         </header>
-        <article className="posts">
-            {
-                posts.map(post => {
-                    return <section key={`post--${post.id}`} className="post">
-                        <div className="post__title">{post.title}</div>
-                        <div className="post__content">{post.content}</div>
-                        <div className="post__author">posted by {post.user.username}</div>
-                        <button className="btn btn-2 btn-sep icon-create"
-                            onClick={() => 
-                                deletePost(post.id)
-                                .then(() => getPosts()
-                                .then((data) => setPosts(data)))}
-                        >Delete</button>
-                    </section>
-                })
-            }
-        </article>
-        </>
-    )
+        <section className="post__list">
+            {posts.map(post => <PostCard key={post.id} post={post}/>)}
+        </section>
+    </>
 }
