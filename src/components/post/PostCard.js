@@ -6,7 +6,7 @@ export const PostCard = ({post}) => {
         <div className="post__card">
             <div className="post__title">{post.title}</div>
             <div className="post__content">{post.content}</div>
-            <div className="post__author">posted by {post.user.username}</div>
+            <div className="post__author">posted by {post.user.user.username}</div>
             {/* <button className="btn btn-2 btn-sep icon-create"
                 onClick={() => 
                     deletePost(post.id)
