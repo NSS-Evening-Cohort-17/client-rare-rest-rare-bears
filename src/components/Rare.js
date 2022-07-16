@@ -64,5 +64,9 @@ export const Rare = () => {
     <Route exact path="/tags" >
       <TagList token={token} setToken={setToken} />
     </Route>
+
+    <Route exact path="/categories/:categoryId/edit" >
+      <CategoryForm token={token} setToken={setToken} />
+    </Route>
   </>
 }
