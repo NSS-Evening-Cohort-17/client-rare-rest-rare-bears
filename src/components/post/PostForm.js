@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react"
 import { useHistory } from 'react-router-dom'
 import { createPost, getPosts } from './PostManager.js'
+import { getCategories } from "../category/CategoryManager.js"
 
 export const PostForm = () => {
     const history = useHistory()
-    // const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState([]);
     const [currentPost, setCurrentPost] = useState({
-        // category: 1,
+        category: 0,
         title: "",
         image_url: "",
         content: ""
     })
 
-    // useEffect(() => {
-    //     getCategories().then((data) => setCategories(data))
-    // }, []);
+    useEffect(() => {
+        getCategories().then((data) => setCategories(data))
+    }, []);
 
     const changePostState = (domEvent) => {
         let newPost = {...currentPost}
@@ -26,7 +27,7 @@ export const PostForm = () => {
     return <>
         <form className="post__form">
             <h2>Create a New Post</h2>
-            {/* <fieldset>
+            <fieldset>
                 <div className="form-group">
                     <label htmlFor="category">Category: </label>
                     <select name="category" required autoFocus className="form-control"
@@ -42,7 +43,7 @@ export const PostForm = () => {
                         }
                     </select>
                 </div>
-            </fieldset> */}
+            </fieldset>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="title">Title: </label>
@@ -76,8 +77,8 @@ export const PostForm = () => {
                     evt.preventDefault()
                     let yourDate = new Date()
                     const post = {
-                        // category: currentPost.category,
-                        category: 1,
+                        category: currentPost.category,
+                        // category: 1,
                         title: currentPost.title,
                         image_url: currentPost.image_url,
                         content: currentPost.content, 
