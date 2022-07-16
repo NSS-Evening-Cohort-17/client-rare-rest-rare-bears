@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { getCategories } from "./CategoryManager";
 
 export const CategoryList = (props) => {
+  const history = useHistory()
+
   const [categories, setCategories] = useState([])
 
   useEffect(() => {
@@ -17,7 +20,11 @@ export const CategoryList = (props) => {
           </section>
         })
       }
+      <button className="btn btn-2 btn-sep icon-create"
+        onClick={() => {
+          history.push ({ pathname: `/categories/new` })
+        }}
+      >Create New Category</button>
     </article>
   )
-
 }
