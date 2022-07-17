@@ -7,3 +7,7 @@ export const getTags = () => {
       .then(response => response.json())
 }
 
+export const createTag = (game) => {
+  return fetch("", { })
+    .then
+}
