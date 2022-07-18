@@ -43,6 +43,7 @@ export const NavBar = ({ token, setToken }) => {
               :
               ""
           }
+    
           {
             token
               ?
