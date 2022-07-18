@@ -11,10 +11,10 @@ const remoteURL = "http://localhost:8000"
 //     .then(setPostComments)
 // }
 
-export const getCommentsByUser = () => {
-    return fetch(`${remoteURL}/posts/my_comments`, {
+export const getCommentsByPost = (id) => {
+    return fetch(`${remoteURL}/comments?post=${id}`, {
         headers: {
-            "Authorization": `Token ${localStorage.getItem("token")}`
+            "Authorization": `Token ${localStorage.getItem("token")}`  
         }
     })
         .then(response => response.json())
