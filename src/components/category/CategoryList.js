@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import { getCategories } from "./CategoryManager";
+import { getCategories, deleteCategory } from "./CategoryManager";
 
 export const CategoryList = (props) => {
   const history = useHistory()
@@ -10,6 +10,12 @@ export const CategoryList = (props) => {
   useEffect(() => {
     getCategories().then(data => setCategories(data))
   }, [])
+
+  const handleDeleteCategory = id => {
+    deleteCategory(id)
+      .then(() => getCategories().then
+            (setCategories))
+  }
 
   return (
     <article className="categories">
@@ -22,6 +28,9 @@ export const CategoryList = (props) => {
                 history.push(`/categories/${category.id}/edit`)
               }}  
             >Edit</button>
+            <button className="btn btn-2 btn-sep icon-delete"
+              onClick={() => handleDeleteCategory(category.id)}>
+              Delete</button>
           </section>
         })
       }
