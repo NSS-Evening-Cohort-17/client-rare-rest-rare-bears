@@ -48,7 +48,7 @@ export const TagForm = () => {
             updateTag(tagId, currentTag)
                 .then(() => history.push("/tags"))
         } else {
-            createTag(tag)
+            createTag(currentTag)
                 .then(() => { history.push("/tags") })
         }
     } 

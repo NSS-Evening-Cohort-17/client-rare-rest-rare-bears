@@ -37,10 +37,8 @@ export const TagList = (props) => {
                             }}
                         >Edit Tag</button>
                         <button className="btn btn-2 btn-sep icon-delete"
-                            onClick={deleteTag =(deleteTag) => {
-                                history.push(`/tags`)
-                            }}
-                        >Delete Tag</button>
+                            onClick={() => deleteTag(tag.id)}>
+                            Delete Tag</button>
                     </section>
                 })
             }
