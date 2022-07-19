@@ -56,7 +56,7 @@ export const CategoryForm = () => {
 
   return (
     <form className="categoryForm">
-      <h2 className="categoryForm__title">Create New Category</h2>
+      <h2 className="categoryForm__title">{categoryId ? "Edit Category" : "Create New Category"}</h2>
       <fieldset>
         <div className="form-group">
           <label htmlFor="label">Category Label: </label>
@@ -70,8 +70,7 @@ export const CategoryForm = () => {
       </fieldset>
 
       <button className="btn btn-primary"
-        onClick={handleClickSaveCategory}>
-        Save Category
+        onClick={handleClickSaveCategory}>{categoryId ? "Submit Changes" : "Create Category"}
       </button>
     </form>
   )
