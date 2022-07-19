@@ -1,3 +1,4 @@
+
 export const getTags = () => {
   return fetch("http://localhost:8000/tags", {
       headers:{
@@ -39,9 +40,11 @@ export const updateTag = (tagId, tag) => {
   })
 }
 
-export const removeTag = () => {
+export const removeTag = (tagId) => {
   return fetch(`http://localhost:8000/tags/${tagId}`, {
-    method: "delete"
+    method: "delete",
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("token")}`
+    },
   })
-    .then(response => response.json())
 }
