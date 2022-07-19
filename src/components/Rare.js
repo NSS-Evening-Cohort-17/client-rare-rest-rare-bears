@@ -49,11 +49,11 @@ export const Rare = () => {
       <Register token={token} setToken={setToken} />
     </Route>
 
-    <Route exact path="/post/:postId/comments/new" >
+    <Route exact path="/posts/:postId/comments/new" >
       <CommentForm token={token} setToken={setToken} />
     </Route>
 
-    <Route exact path="/post/:postId/comments" >
+    <Route exact path="/posts/:postId/comments" >
       <CommentList token={token} setToken={setToken} />
     </Route>
 
@@ -75,6 +75,10 @@ export const Rare = () => {
 
     <Route path="/my-posts">
         <MyPosts />
+    </Route>
+
+    <Route exact path="/posts/:postId/edit" >
+      <PostForm token={token} setToken={setToken} />
     </Route>
     
     <Route exact path="/categories/new" >

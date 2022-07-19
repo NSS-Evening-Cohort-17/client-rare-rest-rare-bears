@@ -16,9 +16,11 @@ export const CommentList = () => {
         getCommentsByPost(postId).then(data => setPostComments(data))
     }, [])
 
+    
+
     return <>
         <div className="post__comments">
-            {postComments.map(comment => <CommentCard key={comment.id} comment={comment}/>)}
+            {postComments.map(comment => <CommentCard key={comment.id} comment={comment} delComment={delComment}/>)}
         </div>
     </>
 }

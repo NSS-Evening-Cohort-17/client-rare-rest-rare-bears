@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { deletePost, getPosts } from "./PostManager";
+import { deletePost, getPosts, updatePost } from "./PostManager";
 import "./Post.css"
 
 export const MyPostsCard = ({post}) => {
@@ -23,6 +23,11 @@ export const MyPostsCard = ({post}) => {
                     .then((data) => setPosts(data)))
                     .then(window.location.reload())}
             >Delete</button>
+            <button className="btn btn-2 btn-sep icon-edit"
+              onClick={() => {
+                history.push(`/posts/${post.id}/edit`)
+              }}  
+            >Edit</button>
         </div>
     </>
 }

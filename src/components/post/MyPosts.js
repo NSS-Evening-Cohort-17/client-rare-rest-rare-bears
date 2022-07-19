@@ -22,7 +22,7 @@ export const MyPosts = () => {
             >New Post</button>
         </header>
         <section className="post__list">
-            {posts.filter(post => post.user == currentUserId).map(post => <MyPostsCard key={post.id} post={post}/>)}
+            {posts.filter(post => post.user.id == currentUserId).map(post => <MyPostsCard key={post.id} post={post}/>)}
         </section>
     </>
 }
