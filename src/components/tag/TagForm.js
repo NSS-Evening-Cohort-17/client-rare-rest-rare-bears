@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react"
-import { useHistory } from 'react-router-dom'
-import { createTag } from './TagManager.js'
+import React, { useState, useEffect } from "react";
+import { useHistory, useParams } from 'react-router-dom';
+import { createTag,getTagById, updateTag } from './TagManager.js';
 
 export const TagForm = () => {
     const history = useHistory()
+    const { tagId } = useParams()
 
     /*
         Since the input fields are bound to the values of
@@ -14,6 +15,17 @@ export const TagForm = () => {
     const [currentTag, setCurrentTag] = useState({
         label: ""
     })
+
+    useEffect(() => {
+        if (tagId) {
+            getTagById(parseInt(tagId))
+              .then(updatedTag => {
+                setCurrentTag({
+                  label: updatedTag.label
+                })
+            })
+        }
+    }, [])
 
     const changeTagState = (domEvent) => {
         const newTag = { ... currentTag }
@@ -27,9 +39,23 @@ export const TagForm = () => {
         setCurrentTag(newTag)
     }
 
+    const handleClickSaveTag = (domEvent) => {
+        domEvent.preventDefault()
+
+        if (currentTag.label === "") {
+            window.alert("Please enter a tag")
+        } else if (tagId) {
+            updateTag(tagId, currentTag)
+                .then(() => history.push("/tags"))
+        } else {
+            createTag(tag)
+                .then(() => { history.push("/tags") })
+        }
+    } 
+
     return (
-        <form>
-            <h2>Create a New Tag</h2>
+        <form className="categoryForm">
+            <h2 className="tagForm__label">{tagId ? "Edit Tag" : "Create New Tag"}</h2>
             <fieldset>
                 <div className="form-group">
                     <label htmlFor="label">Tag: </label>
@@ -43,19 +69,8 @@ export const TagForm = () => {
             </fieldset>
 
             <button type="submit"
-                onClick={evt => {
-                    // Prevent form from being submitted
-                    evt.preventDefault()
-
-                    const tag = {
-                        label: currentTag.label,
-                    }
-
-                    // Send POST request to your API
-                    createTag(tag)
-                        .then(() => history.push("/tags"))
-                }}
-                className="btn btn-primary">Create Tag</button>
+                onClick={handleClickSaveTag}>{tagId ? "Submit Change": "Create Tag"}
+                </button>
 
         </form>
     )

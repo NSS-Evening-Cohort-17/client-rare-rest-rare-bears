@@ -26,6 +26,11 @@ export const TagList = (props) => {
                 tags.map(tag => {
                     return <section key={`tag--$tag.id`} className="tag">
                         <div className="tag__label">{tag.label}</div>
+                        <button className="btn btn-2 btn-sep icon-edit"
+                            onClick={() => {
+                                history.push(`/tags/${tag.id}/edit`)
+                            }}
+                        >Edit Tag</button>
                     </section>
                 })
             }
