@@ -4,6 +4,7 @@ import { ApplicationViews } from "./ApplicationViews"
 import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
+import { CommentForm } from "./comment/CommentForm"
 import { CategoryList } from "./category/CategoryList"
 import { PostList } from "./post/PostList"
 import { PostForm } from "./post/PostForm"
@@ -42,6 +43,10 @@ export const Rare = () => {
       <Register token={token} setToken={setToken} />
     </Route>
 
+    <Route exact path="/comments" >
+      <CommentForm token={token} setToken={setToken} />
+    </Route>
+
     <Route exact path="/categories" >
       <CategoryList token={token} setToken={setToken} />
     </Route>
@@ -62,12 +67,16 @@ export const Rare = () => {
       <CategoryForm token={token} setToken={setToken} />
     </Route>
     
+    <Route exact path="/categories/:categoryId/edit" >
+      <CategoryForm token={token} setToken={setToken} />
+    
     <Route exact path="/tags" >
       <TagList token={token} setToken={setToken} />
     </Route>
 
     <Route exact path="/tags/new" >
       <TagForm token={token} setToken={setToken} />
+
     </Route>
   </>
 }
