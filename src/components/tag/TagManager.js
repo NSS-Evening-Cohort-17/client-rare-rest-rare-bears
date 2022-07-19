@@ -38,3 +38,10 @@ export const updateTag = (tagId, tag) => {
     body: JSON.stringify(tag)
   })
 }
+
+export const removeTag = () => {
+  return fetch(`http://localhost:8000/tags/${tagId}`, {
+    method: "delete"
+  })
+    .then(response => response.json())
+}

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useParams } from 'react-router-dom';
-import { createTag,getTagById, updateTag } from './TagManager.js';
+import { createTag, getTagById, updateTag } from './TagManager.js';
 
 export const TagForm = () => {
     const history = useHistory()
