@@ -9,8 +9,10 @@ import { CategoryList } from "./category/CategoryList"
 import { PostList } from "./post/PostList"
 import { PostForm } from "./post/PostForm"
 import { PostDetail } from "./post/PostDetail"
+import { MyPosts } from "./post/MyPosts.js"
 import { CategoryForm } from "./category/CategoryForm"
 import { TagList } from "./tag/Tag.js"
+import { CommentList } from "./comment/CommentList"
 import { TagForm } from "./tag/TagForm.js"
 
 export const Rare = () => {
@@ -19,6 +21,10 @@ export const Rare = () => {
   const setToken = (newToken) => {
     localStorage.setItem('token', newToken)
     setTokenState(newToken)
+  }
+
+  const setUserId = (userId) => {
+    localStorage.setItem('userId', userId)
   }
 
   return <>
@@ -35,7 +41,7 @@ export const Rare = () => {
 
     <Route exact path="/login" >
       <NavBar token={token} setToken={setToken} />
-      <Login token={token} setToken={setToken} />
+      <Login token={token} setToken={setToken} setUserId={setUserId} />
     </Route>
 
     <Route path="/register" exact>
@@ -43,8 +49,12 @@ export const Rare = () => {
       <Register token={token} setToken={setToken} />
     </Route>
 
-    <Route exact path="/comments" >
+    <Route exact path="/post/:postId/comments/new" >
       <CommentForm token={token} setToken={setToken} />
+    </Route>
+
+    <Route exact path="/post/:postId/comments" >
+      <CommentList token={token} setToken={setToken} />
     </Route>
 
     <Route exact path="/categories" >
@@ -59,8 +69,12 @@ export const Rare = () => {
         <PostForm />
     </Route>
     
-    <Route path="/posts/:postId">
+    <Route exact path="/posts/:postId">
         <PostDetail />
+    </Route>
+
+    <Route path="/my-posts">
+        <MyPosts />
     </Route>
     
     <Route exact path="/categories/new" >
@@ -78,5 +92,10 @@ export const Rare = () => {
     <Route exact path="/tags/new" >
       <TagForm token={token} setToken={setToken} />
     </Route>
+
+    <Route exact path="/tags/:tagId/edit" >
+      <TagForm token={token} setToken={setToken} />
+    </Route>
+
   </>
 }

@@ -4,7 +4,9 @@ import { addComment } from "./CommentManager";
 
 export const CommentForm = () => {
 
-    const {postId, userId} = useParams();
+    const params = useParams();
+    const [userId, setUserId] = useState(parseInt(localStorage.getItem("userId")));
+    const [postId, setPostId] = useState(parseInt(params.postId));
     const history = useHistory();
 
     const [comment, setComment] = useState({
@@ -34,30 +36,30 @@ export const CommentForm = () => {
             </div>
         </fieldset>
 
-        <fieldset>
+        {/* <fieldset>
             <div className="postForm__group">
                 <label htmlFor="createdOn">Date</label>
                 <input type="text" name="createdOn"className="postForm__input" required 
                 placeholder="YYYY-MM-DD" value={comment.createdOn} onChange={changeState}
                 />
             </div>
-        </fieldset>
+        </fieldset> */}
 
         <button
                 type="submit"
                 onClick={evt => {
                     evt.preventDefault()
-
+                    let yourDate = new Date()
                     const newComment = {
                         id: comment.id,
                         author: parseInt(userId),
                         post: parseInt(postId),
                         content: comment.content,
-                        created_on: comment.createdOn
+                        created_on: yourDate.toISOString().split('T')[0]
                     }
-
+                    console.log(newComment)
                     addComment(newComment)
-                    .then(() => history.push(`/posts/${postId}/comments`))
+                    .then(() => history.push(`/post/${postId}/comments`))
                 }}
                 className="formBtn"
                 id="postForm__formBtn">
