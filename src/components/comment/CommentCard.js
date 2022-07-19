@@ -8,7 +8,7 @@ export const CommentCard = ({ comment, delComment }) => {
         return ( 
             <section className="comment">
             <p>{comment.content}</p>
-            <p className="comment__details">Posted by {comment.author.user.username} on {comment.created_on}
+            <p className="comment__details">Posted by {comment.author?.user.username} on {comment.created_on}
             <button className="comment__delete" onClick={() => {delComment(comment.id)}}>
             Delete</button>
             </p>
@@ -18,7 +18,7 @@ export const CommentCard = ({ comment, delComment }) => {
         return ( 
         <section className="comment">
             <p>{comment.content}</p>
-            <p className="comment__details">Posted by {comment.author.user.username} on {comment.created_on}</p>
+            <p className="comment__details">Posted by {comment.author?.user.username} on {comment.created_on}</p>
         </section>
     )
         

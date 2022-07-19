@@ -1,8 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+import { deletePost, getPosts } from "./PostManager";
 import "./Post.css"
 
 export const MyPostsCard = ({post}) => {
+    const history = useHistory();
+    const [posts, setPosts] = useState([]);
     return <>
         <div className="post__card">
             <Link to={`/posts/${post.id}`} className="post__title">
@@ -13,12 +16,13 @@ export const MyPostsCard = ({post}) => {
             </div>
             <div className="post__content">{post.content}</div>
             <div className="post__author">posted by {post.user.user.username}</div>
-            {/* <button className="btn btn-2 btn-sep icon-create"
+            <button className="btn btn-2 btn-sep icon-create"
                 onClick={() => 
                     deletePost(post.id)
                     .then(() => getPosts()
-                    .then((data) => setPosts(data)))}
-            >Delete</button> */}
+                    .then((data) => setPosts(data)))
+                    .then(window.location.reload())}
+            >Delete</button>
         </div>
     </>
 }
