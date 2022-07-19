@@ -93,5 +93,9 @@ export const Rare = () => {
       <TagForm token={token} setToken={setToken} />
     </Route>
 
+    <Route exact path="/tags/:tagId/edit" >
+      <TagForm token={token} setToken={setToken} />
+    </Route>
+
   </>
 }

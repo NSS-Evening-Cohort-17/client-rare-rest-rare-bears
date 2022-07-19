@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useHistory } from "react-router-dom";
-import { getTags } from "./TagManager.js"
+import { getTags, removeTag } from "./TagManager.js"
 
 
 export const TagList = (props) => {
@@ -10,6 +10,11 @@ export const TagList = (props) => {
     useEffect(() => {
         getTags().then(data => setTags(data))
     }, [])
+
+    const deleteTag = id => {
+        removeTag(id)
+        .then(() => getTags().then(setTags));
+    };
 
     return (
         <>
@@ -26,6 +31,16 @@ export const TagList = (props) => {
                 tags.map(tag => {
                     return <section key={`tag--$tag.id`} className="tag">
                         <div className="tag__label">{tag.label}</div>
+                        <button className="btn btn-2 btn-sep icon-edit"
+                            onClick={() => {
+                                history.push(`/tags/${tag.id}/edit`)
+                            }}
+                        >Edit Tag</button>
+                        <button className="btn btn-2 btn-sep icon-delete"
+                            onClick={deleteTag =(deleteTag) => {
+                                history.push(`/tags`)
+                            }}
+                        >Delete Tag</button>
                     </section>
                 })
             }
