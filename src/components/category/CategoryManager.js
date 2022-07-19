@@ -1,5 +1,3 @@
-const remoteURL = "http://localhost:8000"
-
 export const getCategories = () => {
   return fetch("http://localhost:8000/categories", {
     headers: {
@@ -39,5 +37,13 @@ export const updateCategory = (categoryId, category) => {
     },
     body: JSON.stringify(category)
   })
-    // .then(getCategories)
+}
+
+export const deleteCategory = (categoryId) => {
+  return fetch(`http://localhost:8000/categories/${categoryId}`, {
+    method: "DELETE",
+    headers: {
+      "Authorization": `Token ${localStorage.getItem("token")}`
+    }
+  })
 }
