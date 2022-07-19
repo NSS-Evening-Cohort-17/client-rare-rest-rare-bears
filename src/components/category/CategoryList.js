@@ -17,6 +17,11 @@ export const CategoryList = (props) => {
         categories.map(category => {
           return <section key={`category--${category.id}`} className="category">
             <div className="category__label">{category.label}</div>
+            <button className="btn btn-2 btn-sep icon-edit"
+              onClick={() => {
+                history.push(`/categories/${category.id}/edit`)
+              }}  
+            >Edit</button>
           </section>
         })
       }

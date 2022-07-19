@@ -13,6 +13,7 @@ import { MyPosts } from "./post/MyPosts.js"
 import { CategoryForm } from "./category/CategoryForm"
 import { TagList } from "./tag/Tag.js"
 import { CommentList } from "./comment/CommentList"
+import { TagForm } from "./tag/TagForm.js"
 
 export const Rare = () => {
   const [token, setTokenState] = useState(localStorage.getItem('token'))
@@ -80,8 +81,16 @@ export const Rare = () => {
       <CategoryForm token={token} setToken={setToken} />
     </Route>
     
+    <Route exact path="/categories/:categoryId/edit" >
+      <CategoryForm token={token} setToken={setToken} />
+    </Route>
+    
     <Route exact path="/tags" >
       <TagList token={token} setToken={setToken} />
+    </Route>
+
+    <Route exact path="/tags/new" >
+      <TagForm token={token} setToken={setToken} />
     </Route>
   </>
 }
